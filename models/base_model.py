@@ -7,18 +7,27 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Initialize a new instance of the BaseModel class."""
         if kwargs:
-            self.id = kwargs["id"]
-            self.name = kwargs["name"]
-            self.my_number = kwargs["my_number"]
-            self.__class__.__name__ = kwargs["__class__"]
+            if kwargs.get("id") is not None:
+                self.id = kwargs["id"]
 
-            self.created_at: datetime = datetime.strptime(
-                kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f"
-            )
+            if kwargs.get("name") is not None:
+                self.name = kwargs["name"]
 
-            self.updated_at: datetime = datetime.strptime(
-                kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f"
-            )
+            if kwargs.get("my_number") is not None:
+                self.my_number = kwargs["my_number"]
+
+            if kwargs.get("__class__") is not None:
+                self.__class__.__name__ = kwargs["__class__"]
+
+            if kwargs.get("created_at") is not None:
+                self.created_at: datetime = datetime.strptime(
+                    kwargs["created_at"], "%Y-%m-%dT%H:%M:%S.%f"
+                )
+
+            if kwargs.get("updated_at") is not None:
+                self.updated_at: datetime = datetime.strptime(
+                    kwargs["updated_at"], "%Y-%m-%dT%H:%M:%S.%f"
+                )
 
         else:
             self.id: str = str(uuid.uuid4())
@@ -72,7 +81,7 @@ for key in my_model_json.keys():
 
 print("--****----")
 dictory = {
-    "id": "56d43177-cc5f-4d6c-a0c1-e167f8c27337",
+    "id": "y56d43177-cc5f-4d6c-a0c1-e167f8c27337",
     "created_at": "2017-09-28T21:03:54.052298",
     "__class__": "BaseModel",
     "my_number": 89,
